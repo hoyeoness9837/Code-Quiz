@@ -3,10 +3,10 @@
 //score still will be stored in LS.
 //WHEN I answer a question incorrectly THEN time is subtracted from the clock
 const timeDisplay = document.getElementById("js-timeLeft");
-const questionsContainer = document.getElementById("js-questions");
-const answersContainer = document.getElementById("js-answers");
+const questions = document.getElementById("js-questions");
+const answers = document.getElementById("js-answers");
 //Initial timer setting
-let time = 60;
+let time = 3;
 let minutes = "";
 let seconds = "";
 //Initial question setting
@@ -19,14 +19,16 @@ const questionsContainer = [
     d: "object",
   },
   {
-    Question: "Which of the following is the correct JS that converts a string into a number?",
+    Question:
+      "Which of the following is the correct JS that converts a string into a number?",
     a: "parseNumber()",
     b: "parseInt()",
     c: "convertInt()",
     d: "JSON.stringify",
   },
   {
-    Question: "Which of the following is the correct CSS selector for html Id ?",
+    Question:
+      "Which of the following is the correct CSS selector for html Id ?",
     a: "#",
     b: ".",
     c: "<>",
@@ -40,13 +42,20 @@ const questionsContainer = [
     d: "const",
   },
 ];
-const answersContainer = ("d","b","a","c");
-function checkAnswer() {}
-function submitAnswer() {}
-function showQuestions(i = 0; i) {
-  substring(Math.floor(Math.random()*questionsContainer.length))
-}
-f;
+const answersContainer = ("d", "b", "a", "c");
+// function checkAnswer() {}
+// function submitAnswer() {
+//   document.createEvent
+// }
+// function showQuestions(i = 0; i) {
+
+
+//   substring(Math.floor(Math.random()*questionsContainer.length))
+// }
+
+
+
+
 
 //timer function setting.
 const timer = () => {
@@ -61,6 +70,7 @@ const timer = () => {
 
     if (time < 0) {
       clearInterval(count);
+      alert("time is up")
       //display earned score and type name submit button and also try again button
     }
   }, 1000);
