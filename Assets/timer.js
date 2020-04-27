@@ -7,24 +7,29 @@ const timeDisplay = document.getElementById("js-timeLeft");
 let time = 3;
 let minutes = "";
 let seconds = "";
-//timer function setting
+
+function submitScore(){
+    
+}
+
+//timer function setting.
 const timer = () => {
   let count = setInterval(function () {
     minutes = parseInt(time / 60);
     seconds = time % 60;
     time--;
-/* time display setting */
+    //display timeleft setting
     timeDisplay.innerHTML = `${minutes < 10 ? `0${minutes}` : minutes}:${
-      seconds < 10 ? `0${seconds}` : 
+      seconds < 10 ? `0${seconds}` : seconds
     }`;
-/*terminate timer setting */
+
     if (time < 0) {
       clearInterval(count);
+      //display earned score and type name submit button and also try again button
     }
   }, 1000);
 };
-
-//initiating fuctions
+//initial function trigger
 function init() {
   timer();
 }
