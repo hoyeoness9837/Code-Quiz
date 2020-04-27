@@ -30,12 +30,10 @@ function hideQuestion() {
 function checkAnswer(answer) {
   if (answersContainer[questionNum - 1] == answer) {
     score++;
-    document.all.answerBoard.innerHTML =
-      "<font color=blue><b>Correct!.</b></font>";
+    document.all.answerBoard.innerHTML = "<b>Correct!</b>";
   } else {
     time--;
-    document.all.answerBoard.innerHTML =
-      "<font color=red><b>Wrong!.</b></font>";
+    document.all.answerBoard.innerHTML = "<b>Wrong!</b>";
   }
 }
 
