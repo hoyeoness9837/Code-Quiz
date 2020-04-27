@@ -13,6 +13,11 @@ const answersContainer = ("d", "b", "a", "c");
 let score = 0;
 let questionNum = 1;
 
+//show name and submit buttons
+function showNameSubmit
+
+
+
 //show questions
 function showQuestion() {
   questions.style.display = "inline";
@@ -51,10 +56,9 @@ const timer = () => {
     if (time < 0) {
       clearInterval(count);
       alert("time is up");
+      document.open()
+      document.writeln()
       //display earned score and type name submit button and also try again button
-      document.all.quizScore.innerHTML =
-        "You got " + score + " questions right.";
-      document.all.quizScore.style.display = "inline";
     }
   }, 1000);
 };
