@@ -5,9 +5,7 @@ let nameCreated = document.querySelector("#js-nameCreated");
 
 let scores = document.querySelector("#js-score");
 
-function addScore (){
-    
-}
+function addScore() {}
 
 addName.addEventListener(
   "submit",
@@ -31,15 +29,4 @@ let saved = localStorage.getItem("names");
 // If there are any saved items, update our list
 if (saved) {
   nameCreated.innerHTML = saved;
-}
-
-///sort function
-
-document.getElementById("js-score").innerHTML = scores;
-
-function sortScore() {
-  scores.sort(function (a, b) {
-    return b - a;
-  });
-  document.getElementById("js-score").innerHTML = scores;
 }

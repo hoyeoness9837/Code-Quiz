@@ -4,58 +4,40 @@
 //WHEN I answer a question incorrectly THEN time is subtracted from the clock
 const timeDisplay = document.getElementById("js-timeLeft");
 const questions = document.getElementById("js-questions");
-const answers = document.getElementById("js-answers");
 //Initial timer setting
-let time = 3;
+let time = 20;
 let minutes = "";
 let seconds = "";
 //Initial question setting
-const questionsContainer = [
-  {
-    Question: "Which of the following is not a type of primitive data?",
-    a: "boolean",
-    b: "undefined",
-    c: "null",
-    d: "object",
-  },
-  {
-    Question:
-      "Which of the following is the correct JS that converts a string into a number?",
-    a: "parseNumber()",
-    b: "parseInt()",
-    c: "convertInt()",
-    d: "JSON.stringify",
-  },
-  {
-    Question:
-      "Which of the following is the correct CSS selector for html Id ?",
-    a: "#",
-    b: ".",
-    c: "<>",
-    d: "!",
-  },
-  {
-    Question: "Which of the following is not a type of variable?",
-    a: "var",
-    b: "let",
-    c: "if",
-    d: "const",
-  },
-];
 const answersContainer = ("d", "b", "a", "c");
-// function checkAnswer() {}
-// function submitAnswer() {
-//   document.createEvent
-// }
-// function showQuestions(i = 0; i) {
+let score = 0;
+let questionNum = 1;
 
+//show questions
+function showQuestion() {
+  questions.style.display = "inline";
 
-//   substring(Math.floor(Math.random()*questionsContainer.length))
-// }
-
-
-
-
+  //after making a choice and ...
+  hideQuestion();
+}
+//
+function hideQuestion() {
+  questions.style.display = "none";
+  questionNum++;
+  showQuestion();
+}
+//checking questions
+function checkAnswer(answer) {
+  if (answersContainer[questionNum - 1] == answer) {
+    score++;
+    document.all.answerBoard.innerHTML =
+      "<font color=blue><b>Correct!.</b></font>";
+  } else {
+    time--;
+    document.all.answerBoard.innerHTML =
+      "<font color=red><b>Wrong!.</b></font>";
+  }
+}
 
 //timer function setting.
 const timer = () => {
@@ -70,13 +52,17 @@ const timer = () => {
 
     if (time < 0) {
       clearInterval(count);
-      alert("time is up")
+      alert("time is up");
       //display earned score and type name submit button and also try again button
+      document.all.quizScore.innerHTML =
+        "You got " + score + " questions right.";
+      document.all.quizScore.style.display = "inline";
     }
   }, 1000);
 };
 //initial function trigger
 function init() {
   timer();
+  window.onload = showQuestion;
 }
 init();
