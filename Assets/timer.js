@@ -3,21 +3,27 @@
 //score still will be stored in LS.
 const timeDisplay = document.getElementById("js-timeLeft");
 
-let count = 90;
+let time = 3;
+let minutes = "";
+let seconds = "";
 
-function timer() {
-  let seconds = count % 60;
-  let tempMinutes = Math.floor(count / 60);
-  let minutes = tempMinutes % 60;
-  timeDisplay.innerText = `${minutes < 10 ? `0${minutes}` : minutes}:${
-    seconds < 10 ? `0${seconds}` : seconds
-  }`;
-}
+const timer = () => {
+  let count = setInterval(function () {
+    minutes = parseInt(time / 60);
+    seconds = time % 60;
+    time--;
+
+    timeDisplay.innerHTML = `${minutes < 10 ? `0${minutes}` : minutes}:${
+      seconds < 10 ? `0${seconds}` : seconds
+    }`;
+
+    if (time < 0) {
+      clearInterval(count);
+    }
+  }, 1000);
+};
 
 function init() {
-  setInterval(() => {
-    count--;
-    timer();
-  }, 1000);
+  timer();
 }
 init();
