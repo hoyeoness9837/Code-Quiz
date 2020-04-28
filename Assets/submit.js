@@ -13,6 +13,7 @@ addName.addEventListener(
     nameList.value = "";
     // Save the list to localStorage
     localStorage.setItem("names", nameCreated.innerHTML);
+    localStorage.setItem("")
   },
   false
 );
