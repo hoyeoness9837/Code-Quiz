@@ -6,6 +6,7 @@ const timeDisplay = document.getElementById("js-timeLeft");
 const choices = document.getElementById("js-choices");
 const questions = document.getElementById("js-questions");
 const score = document.getElementById("js-score");
+let greet = document.getElementById("js-greet");
 const questionContainer = [
   {
     Question: "Which of the following is not a type of primitive data?",
@@ -41,24 +42,33 @@ const questionContainer = [
     d: "const",
   },
 ];
-const answersContainer = ["0", "1", "2", "3"];
+const answersContainer = ["d", "b", "a", "c"];
 //Initial timer setting
-let time = 10;
+let time = 50;
 let minutes = "";
 let seconds = "";
+let q_number = 1;
+let i = 0;
 
-function checkAnswer(x) {
-  if (x === answersContainer[x]) {
-    console.log("YEs!");
+function answerCheck(answer) {
+  if (answersContainer[q_number - 1] === answer) {
+    greet.innerHTML = "Correct!";
+    score.value++;
+    i++;
+    q_number++;
+    displayQuestion();
+  } else {
+    greet.innerHTML = "Wrong!";
+    time--;
   }
 }
 
-for (let i = 0; i < questionContainer.length; i++) {
+function displayQuestion() {
   questions.innerHTML = `Question:${questionContainer[i].Question}`;
-  choices.innerHTML = `<button onclick=checkAnswer(0)>a. ${questionContainer[i].a}</button>
-  <button onclick=checkAnswer(1)>b. ${questionContainer[i].b}</button>
-  <button onclick=checkAnswer(2)>c. ${questionContainer[i].c}</button>
-  <button onclick=checkAnswer(3)>d. ${questionContainer[i].d}</button>`;
+  choices.innerHTML = `<button onclick="answerCheck('a')">a. ${questionContainer[i].a}</button>
+  <button onclick="answerCheck('b')">b. ${questionContainer[i].b}</button>
+  <button onclick="answerCheck('c')">c. ${questionContainer[i].c}</button>
+  <button onclick="answerCheck('d')">d. ${questionContainer[i].d}</button>`;
 }
 //timer function setting.
 const timer = () => {
@@ -74,14 +84,51 @@ const timer = () => {
     if (time < 0) {
       clearInterval(count);
       alert("time is up");
-      document.open();
-      document.writeln();
-      //display earned score and type name submit button and also try again button
+      showSubmit();
+      //display submitpage
     }
   }, 1000);
 };
+
+//submit javascript
+const addName = document.querySelector("#js-addName");
+const nameList = document.querySelector("#js-nameList");
+const nameCreated = document.querySelector("#js-nameCreated");
+
+function hideSubmit() {
+  addName.innerHTML = "";
+}
+
+function showSubmit() {
+  addName.addEventListener(
+    "submit",
+    function (event) {
+      // Don't submit the form
+      event.preventDefault();
+
+      nameCreated.innerHTML += "<li>" + nameList.value + "</li>";
+      // Clear input
+      nameList.value = "";
+
+      // Save the list to localStorage
+      localStorage.setItem("names", nameCreated.innerHTML);
+    },
+    false
+  );
+}
+
+// Check for saved nameCreated items
+let saved = localStorage.getItem("names");
+
+// If there are any saved items, update our list
+if (saved) {
+  nameCreated.innerHTML = saved;
+}
+
 //initial function trigger
 function init() {
   timer();
+  displayQuestion();
+  hideSubmit();
 }
 init();
