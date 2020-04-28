@@ -5,7 +5,6 @@
 const timeDisplay = document.getElementById("js-timeLeft");
 const choices = document.getElementById("js-choices");
 const questions = document.getElementById("js-questions");
-const score = document.getElementById("js-score");
 let greet = document.getElementById("js-greet");
 const questionContainer = [
   {
@@ -27,7 +26,7 @@ const questionContainer = [
 
   {
     Question:
-      "Which of the following is the correct CSS selector for html Id ?",
+      "Which of the following is the correct CSS Id selector from html?",
     a: "#",
     b: ".",
     c: "<>",
@@ -44,25 +43,26 @@ const questionContainer = [
 ];
 const answersContainer = ["d", "b", "a", "c"];
 //Initial timer setting
-let time = 50;
+let time = 30;
 let minutes = "";
 let seconds = "";
 let q_number = 1;
 let i = 0;
+let score = 0;
 
 function answerCheck(answer) {
   if (answersContainer[q_number - 1] === answer) {
     greet.innerHTML = "Correct!";
-    score.value++;
+    score += 25;
     i++;
     q_number++;
+    document.getElementById("js-score").textContent = score;
     displayQuestion();
   } else {
     greet.innerHTML = "Wrong!";
-    time--;
+    time -= 10;
   }
 }
-
 function displayQuestion() {
   questions.innerHTML = `Question:${questionContainer[i].Question}`;
   choices.innerHTML = `<button onclick="answerCheck('a')">a. ${questionContainer[i].a}</button>
@@ -83,46 +83,27 @@ const timer = () => {
 
     if (time < 0) {
       clearInterval(count);
-      alert("time is up");
       showSubmit();
+      document.getElementById("js-card").innerHTML = "";
       //display submitpage
     }
   }, 1000);
 };
-
 //submit javascript
-const addName = document.querySelector("#js-addName");
-const nameList = document.querySelector("#js-nameList");
-const nameCreated = document.querySelector("#js-nameCreated");
-
 function hideSubmit() {
-  addName.innerHTML = "";
+  document.getElementById("js-submitForm").innerHTML = "";
 }
-
 function showSubmit() {
-  addName.addEventListener(
-    "submit",
-    function (event) {
-      // Don't submit the form
-      event.preventDefault();
-
-      nameCreated.innerHTML += "<li>" + nameList.value + "</li>";
-      // Clear input
-      nameList.value = "";
-
-      // Save the list to localStorage
-      localStorage.setItem("names", nameCreated.innerHTML);
-    },
-    false
-  );
-}
-
-// Check for saved nameCreated items
-let saved = localStorage.getItem("names");
-
-// If there are any saved items, update our list
-if (saved) {
-  nameCreated.innerHTML = saved;
+  document.getElementById("js-submitForm").innerHTML = `<form id="js-addName">
+  <input
+    placeholder="Enter your name"
+    type="text"
+    name="nameList"
+    id="js-nameList"
+  />
+  <button type="submit">submit</button>
+  </form>
+  <ul id="js-nameCreated"></ul>`;
 }
 
 //initial function trigger

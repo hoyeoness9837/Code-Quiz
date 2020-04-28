@@ -11,12 +11,12 @@
         <a href="scoreboard.html">scoreboard</a>
       </span>
       <span id="js-timeLeft">00:00</span>
-      <p id="js-score"><p/>
+      <p>score:<span id="js-score"></span></p>
     </nav>
-    <div>
+    <div id ="js-card">
       <div>
-        <h1 id="js-questions">Question: </h3>
-        <h3 id="js-choices">Choose an answer:</h6>
+        <h1 id="js-questions"></h3>
+        <h3 id="js-choices"></h6>
       </div>
       <div>
         <p id="js-greet"></p>
@@ -24,18 +24,9 @@
     </div>
     <!-- submitform below -->
     <div id = "js-submitForm">
-      <form id="js-addName">
-        <input
-          placeholder="Enter your name"
-          type="text"
-          name="nameList"
-          id="js-nameList"
-        />
-        <button type="submit">submit</button>
-      </form>
-    <ul id="js-nameCreated"></ul>
     </div>
-
+    <ul id="js-nameCreated"></ul>
     <script src="./Assets/timer.js"></script>
+    <script src="./Assets/submit.js"></script>
   </body>
 </html>
