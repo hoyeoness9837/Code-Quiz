@@ -1,4 +1,6 @@
 // Get form, item, and nameCreated
+// global var setting & for loop & quesiton in array.
+//
 let addName = document.querySelector("#js-addName");
 let nameList = document.querySelector("#js-nameList");
 let nameCreated = document.querySelector("#js-nameCreated");

@@ -3,42 +3,63 @@
 //score still will be stored in LS.
 //WHEN I answer a question incorrectly THEN time is subtracted from the clock
 const timeDisplay = document.getElementById("js-timeLeft");
+const choices = document.getElementById("js-choices");
 const questions = document.getElementById("js-questions");
+const score = document.getElementById("js-score");
+const questionContainer = [
+  {
+    Question: "Which of the following is not a type of primitive data?",
+    a: "boolean",
+    b: "undefined",
+    c: "null",
+    d: "object",
+  },
+
+  {
+    Question:
+      "Which of the following is the correct JS that converts a string into a number?",
+    a: "parseNumber()",
+    b: "parseInt()",
+    c: "convertInt()",
+    d: "JSON.stringify",
+  },
+
+  {
+    Question:
+      "Which of the following is the correct CSS selector for html Id ?",
+    a: "#",
+    b: ".",
+    c: "<>",
+    d: "!",
+  },
+
+  {
+    Question: "Which of the following is not a type of variable?",
+    a: "var",
+    b: "let",
+    c: "if",
+    d: "const",
+  },
+];
+const answersContainer = ["0", "1", "2", "3"];
 //Initial timer setting
-let time = 20;
+let time = 10;
 let minutes = "";
 let seconds = "";
-//Initial question setting
-const answersContainer = ("d", "b", "a", "c");
-let score = 0;
-let questionNum = 1;
 
-//show name and submit buttons
-function showNameSubmit() {}
-
-//show questions
-function showQuestion() {
-  questions.style.display = "inline";
-  //after making a choice and ...
-  hideQuestion();
-}
-//
-function hideQuestion() {
-  questions.style.display = "none";
-  questionNum++;
-  showQuestion();
-}
-//checking questions
-function checkAnswer(answer) {
-  if (answersContainer[questionNum - 1] == answer) {
-    score++;
-    document.all.answerBoard.innerHTML = "<b>Correct!</b>";
-  } else {
-    time--;
-    document.all.answerBoard.innerHTML = "<b>Wrong!</b>";
+function checkAnswer(x) {
+  if (x === answersContainer[x]) {
+    console.log("YEs!");
   }
 }
 
+for (let i = 0; i < questionContainer.length; i++) {
+  questions.innerHTML = `Question:${questionContainer[i].Question}`;
+  choices.innerHTML = `<button onclick=checkAnswer(0)>a. ${questionContainer[i].a}</button>
+  <button onclick=checkAnswer(1)>b. ${questionContainer[i].b}</button>
+  <button onclick=checkAnswer(2)>c. ${questionContainer[i].c}</button>
+  <button onclick=checkAnswer(3)>d. ${questionContainer[i].d}</button>`;
+}
 //timer function setting.
 const timer = () => {
   let count = setInterval(function () {
@@ -62,6 +83,5 @@ const timer = () => {
 //initial function trigger
 function init() {
   timer();
-  window.onload = showQuestion;
 }
 init();
